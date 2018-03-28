@@ -1,0 +1,55 @@
+body{
+    /*background: #d2d6de;*/
+    padding-top: 200px;
+}
+#login-logo{
+    height: 60px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+#login-box{
+    background: #ffffff;
+    height: 300px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius: 10px;
+}
+.login-box-msg{
+    margin-top: 25px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+#password{
+    margin-bottom: 40px;
+}
+.panel-header:not(.accordion-header) .panel-title.panel-with-icon {
+    margin-left: 4px;
+    font-size: 14px!important;
+    color: #1f637b;
+}
+#base-setting{
+    list-style-type:none;
+    padding: 0px;
+}
+#base-setting li{
+    padding-left: 20px;
+    height: 24px;
+    line-height: 24px;
+    margin-bottom: 2px;
+    border-radius: 5px;
+    background: #E0ECFF;
+    font-weight: bold;
+    color: #222222;
+    cursor:pointer;
+}
+#base-setting li:hover{
+    background: #B0E0E6;
+}
+
+.common{
+    height: 40px;
+    line-height: 40px;
+    margin-left: 20px;
+    margin-bottom: 4px;
+}

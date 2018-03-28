@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fungo.mapper.WindowAuthMapper">
+	<select id="findAuth" parameterType="java.util.Map" resultType="cn.fungo.domain.WindowAuthVO">
+		select w.id, w.name, w.url, moa.id authId, moa.AuthName from W12Windows w 
+		left join W3MerchOperationAuth moa
+		on w.id=moa.WindowId
+		<where>
+			<if test="name != '' and name != null">
+				w.name LIKE '%${name}%'
+			</if>
+		</where>
+		order by w.id desc limit 20
+	</select>
+	
+	<select id="getWindowId" resultType="int">
+		select max(id)+1 id from W12Windows  
+	</select>
+	
+	<insert id="addWindows" parameterType="cn.fungo.domain.W12Windows">
+		insert into W12Windows 
+		(id, name ,url)
+		values
+		(#{id}, #{name}, #{url})
+	</insert>
+	
+	<select id="getWindowById" resultType="cn.fungo.domain.W12Windows" parameterType="string">
+		select * from W12Windows where id=#{id}
+	</select>
+	
+	<update id="updateWindow" parameterType="cn.fungo.domain.W12Windows">
+		update W12Windows set name=#{name}, url=#{url} 
+		where id=#{id}
+	</update>
+	
+	<select id="findWindow" resultType="cn.fungo.domain.W12Windows">
+		select * from W12Windows
+	</select>
+	
+	<insert id="addAuth" parameterType="cn.fungo.domain.W3MerchOperationAuth">
+		insert into W3MerchOperationAuth
+		(id, windowId, authName)
+		values
+		(#{id}, #{windowId}, #{authName})
+	</insert>
+	
+	<select id="getAuthId" resultType="int">
+		select IFNULL(max(id)+1,1) id from W3MerchOperationAuth
+	</select>
+	
+	<select id="getAuthById" parameterType="string" resultType="cn.fungo.domain.W3MerchOperationAuth">
+		select * from W3MerchOperationAuth where id=#{id}
+	</select>
+	
+	<update id="updateAuth" parameterType="cn.fungo.domain.W3MerchOperationAuth">
+		update W3MerchOperationAuth set windowId=#{windowId}, authName=#{authName} 
+		where id=#{id}
+	</update>
+	
+	<delete id="removeAuth" parameterType="string">
+		delete from W3MerchOperationAuth where id=#{id}
+	</delete>
+	<delete id="removeWindow" parameterType="string">
+		delete from W12Windows where id=#{id}
+	</delete>
+</mapper>

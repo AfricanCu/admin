@@ -1,0 +1,34 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+    <script type="text/javascript" src="easyui/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="scripts/main.js" type="text/javascript"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div id="login-logo" class="col-md-4 col-md-offset-4">范格后台管理系统</div>
+        <div id="login-box" class="col-md-4 col-md-offset-4">
+            <p class="login-box-msg">管理员登录</p>
+            <div id="account" class="form-group has-feedback">
+                <input type="text" class="form-control" v-model="username" placeholder="账号">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div id="password" class="form-group has-feedback">
+                <input type="password" class="form-control" v-model="password" placeholder="密码">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <hr/>
+            <button type="button" class="btn btn-primary btn-block" onclick="login()">登录</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

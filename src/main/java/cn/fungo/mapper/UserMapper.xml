@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fungo.mapper.UserMapper">
+	<select id="findUser" parameterType="java.util.Map" resultType="cn.fungo.domain.W12User">
+		select id, OperatorCode, OperatorName, OperatorPhone, PinyinCode, case UserType when '00' then '商户' else '供应商' end UserType,
+		case RealType when '00' then '否' else '是' end RealType, LoginNum from W12User t
+		<where>
+			<if test="name != '' and name != null">
+				t.OperatorName LIKE '%${name}%'
+			</if>
+		</where>
+		order by t.id desc limit 20
+	</select>
+	
+	<select id="generatorPriKey" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select next_value (#{value})
+	</select>
+	
+	<insert id="addUser" parameterType="cn.fungo.domain.W12User">
+		insert into W12User 
+		(id, OperatorCode, OperatorName, OperatorPhone, OperatorPwd, PinyinCode, LoginNum, UserType, UserStatus, CreateDate, UpdateDate, RealType)
+		values
+		(#{id}, #{operatorCode}, #{operatorName}, #{operatorPhone}, #{operatorPwd}, #{pinyinCode}, #{loginNum}, #{userType}, 
+		#{userStatus}, #{createDate}, #{updateDate}, #{realType})
+	</insert>
+	
+	<select id="getUserInfo" parameterType="String" resultType="cn.fungo.domain.W12User">
+		select * from W12User where id=#{id}
+	</select>
+	
+	<update id="updateUser" parameterType="cn.fungo.domain.W12User">
+		update W12User set OperatorName=#{operatorName}, OperatorPhone=#{operatorPhone}, OperatorPwd=#{operatorPwd}, PinyinCode=#{pinyinCode},
+		UserType=#{userType},UpdateDate=#{updateDate}
+		where id=#{id}
+	</update>
+	
+	<delete id="removeUser" parameterType="String">
+		delete from W12User where id=#{id}
+	</delete>
+</mapper> 

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fungo.mapper.EventMapper">
+	<select id="findAllEvent" parameterType="java.util.Map" resultType="cn.fungo.domain.W12EventSet">
+		select t.id, workFlowName, eventName, parentEventid, t.finishPeriod, eventLevel, PositionName, t.sorted from W12EventSet t
+		join W12WorkFlowSet wfs on t.WorkFlowId=wfs.id
+		left join W3MerchPosition mp on mp.id=t.positionId
+		<where>
+			<if test="name != '' and name != null">
+				t.EventName LIKE '%${name}%'
+			</if>
+		</where>
+		order by t.id desc limit 20
+	</select>
+	
+	<select id="findWorkFlow" resultType="cn.fungo.domain.W12WorkFlowSet">
+		select id, concat(id,'-',workFlowName) workFlowName from W12WorkFlowSet
+	</select>
+	
+	<select id="findPosition" resultType="cn.fungo.domain.W3MerchPosition">
+		select id, concat('商户-',PositionName) PositionName from W3MerchPosition
+		union
+		select id, concat('供应商-',PositionName) from W2Position
+	</select>
+	
+	<select id="getEventId" resultType="int">
+		select MAX(id)+1 id from W12EventSet
+	</select>
+	
+	<insert id="addEvent" parameterType="cn.fungo.domain.W12EventSet">
+		insert into W12EventSet
+		(id, EventName, WorkFlowId, PositionId, ParentEventid, FinishPeriod, EventLevel, Sorted)
+		values
+		(#{id}, #{eventName}, #{workFlowId}, #{positionId}, #{parentEventid}, #{finishPeriod}, #{eventLevel}, #{sorted})
+	</insert>
+	
+	<select id="findEventById" parameterType="String" resultType="cn.fungo.domain.W12EventSet">
+		select * from W12EventSet where id=#{id}
+	</select>
+	
+	<update id="updateEvent" parameterType="cn.fungo.domain.W12EventSet">
+		update W12EventSet set EventName=#{eventName}, WorkFlowId=#{workFlowId}, PositionId=#{positionId}, ParentEventid=#{parentEventid}, 
+		FinishPeriod=#{finishPeriod}, EventLevel=#{eventLevel}, Sorted=#{sorted}
+		where id=#{id}
+	</update>
+	
+	<delete id="removeEvent" parameterType="String">
+		delete from W12EventSet where id=#{id}
+	</delete>
+</mapper>

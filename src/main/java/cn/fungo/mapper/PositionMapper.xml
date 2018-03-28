@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.fungo.mapper.PositionMapper">
+
+	<select id="findSupplierPositions" resultType="cn.fungo.domain.W2Position">
+		SELECT * FROM W2Position where PositionName like '%${value}%'
+	</select>
+	
+	<select id="findMerchPositions" resultType="cn.fungo.domain.W3MerchPosition">
+		SELECT * FROM W3MerchPosition where PositionName like '%${value}%'
+	</select>
+	
+	<!-- 添加供应商岗位 -->
+	<select id="findMaxIdFromW2Position"  resultType="java.lang.Integer">
+		SELECT MAX(id) FROM W2Position
+	</select>
+	<insert id="insertSupplierPosition" parameterType="cn.fungo.domain.W2Position">
+		insert into W2Position(id, PositionCode, PositionName,  PositionType) 
+		values(#{id}, #{positionCode}, #{positionName}, #{positionType})
+	</insert>
+	
+	<!-- 添加商户岗位 -->
+	<select id="findMaxIdFromW3MerchPosition" resultType="java.lang.Integer">
+		SELECT MAX(id) FROM W3MerchPosition
+	</select>
+	<insert id="insertMerchPosition" parameterType="cn.fungo.domain.W3MerchPosition">
+		insert into W3MerchPosition(id, PositionCode,  PositionName,  PositionType)
+		values (#{id}, #{positionCode}, #{positionName}, #{positionType})
+	</insert>
+	
+	<!-- 删除商户岗位 -->
+	<delete id="deleteMerchPosition" parameterType="java.lang.String">
+		delete from W3MerchPosition where id = #{value}
+	</delete>
+	
+	<!-- 删除供应商岗位 -->
+	<delete id="deleteW2PositionById" parameterType="java.lang.String">
+		delete from W2Position where id = #{value}
+	</delete>
+	
+	<!-- 修改商户岗位 -->
+	<update id="editMerchPosition" parameterType="cn.fungo.domain.W3MerchPosition">
+		update W3MerchPosition set PositionName = #{positionName}, PositionCode = #{positionCode},
+		PositionType = #{positionType} where id = #{id}
+	</update>
+	
+	<!-- 修改供应商岗位 -->
+	<update id="editW2PositionById" parameterType="cn.fungo.domain.W2Position">
+		update W2Position set PositionName = #{positionName}, PositionCode = #{positionCode},
+		PositionType = #{positionType} where id = #{id}
+	</update>
+	
+	
+</mapper>
