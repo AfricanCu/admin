@@ -1,5 +1,18 @@
 var login = function () {
-    $(location).attr('href', 'index.jsp');
+    var $username = $("#username").val();
+    var $password = $("#password").val();
+    $.ajax({
+        type:"post",
+        url:"login",
+        data:{'username':$username, 'password':$password},
+        success:function (r) {
+            if (r){
+                $(location).attr('href', 'index.jsp');
+            }else{
+                $("#error-msg").text("用户名或密码错误");
+            }
+        }
+    })
 }
 var addPanel = function (title) {
     var t = title.split("|");

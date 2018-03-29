@@ -11,22 +11,23 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="scripts/main.js" type="text/javascript"></script>
 </head>
-<body>
+<body id="login-body">
 <div class="container">
     <div class="row">
         <div id="login-logo" class="col-md-4 col-md-offset-4">范格后台管理系统</div>
-        <div id="login-box" class="col-md-4 col-md-offset-4">
+        <div id="login-box" class="col-md-4 col-md-offset-4" style="text-align: center">
             <p class="login-box-msg">管理员登录</p>
-            <div id="account" class="form-group has-feedback">
-                <input type="text" class="form-control" v-model="username" placeholder="账号">
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" id="username" placeholder="账号">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
-            <div id="password" class="form-group has-feedback">
-                <input type="password" class="form-control" v-model="password" placeholder="密码">
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" id="password" placeholder="密码">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <hr/>
-            <button type="button" class="btn btn-primary btn-block" onclick="login()">登录</button>
+            <button type="button" class="btn btn-primary btn-block" style="margin-bottom: 10px" onclick="login()">登录</button>
+            <span id="error-msg" style="color: red"></span>
         </div>
     </div>
 </div>
