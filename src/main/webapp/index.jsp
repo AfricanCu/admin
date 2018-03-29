@@ -24,6 +24,7 @@
                 <li id="event_id" onclick="addPanel('事件设置|event.jsp')">事件设置</li>
                 <li id="position_id" onclick="addPanel('岗位设置|position.jsp')">岗位设置</li>
                 <li id="operator_id" onclick="addPanel('操作员设置|operator.jsp')">操作员设置</li>
+                <li id="position_auth_id" onclick="addPanel('岗位权限设置|position_auth.jsp')">岗位权限设置</li>
                 <li id="window_auth_id" onclick="addPanel('窗体权限设置|window_auth.jsp')">窗体权限设置</li>
             </ul>
         </div>

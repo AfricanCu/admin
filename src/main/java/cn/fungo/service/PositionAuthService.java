@@ -12,9 +12,9 @@ public interface PositionAuthService {
 	
 	List<WindowVO> findWindowAuth();
 	
-	Integer insertPositionAuth(List<AuthVO> list, String positionId);
+	Integer insertPositionAuth(List<AuthVO> list, String positionId,String positionType);
 
-	Integer updatePositionAuth(List<AuthVO> list, String positionId);
+	Integer updatePositionAuth(List<AuthVO> list, String positionId,String positionType);
 	
 
 }

@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ZMJ
-  Date: 2018/3/28
-  Time: 17:39
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -50,6 +43,7 @@
             $('#btn_ok').bind('click', function() {
                 var data = $('#window_auth_tree').tree('getChecked');
                 var positionId = $('#position').combobox('getValue');
+                var position_type = $('#position_type').combobox('getValue');
                 var list = [];
                 for (var i = 0; i < data.length; i++) {
                     if (data[i].children === undefined) {
@@ -62,7 +56,7 @@
                 $.ajax({
                     url: "position_auth/insertPositionAuth",
                     type: 'post',
-                    data: {'data': JSON.stringify(list), 'positionId':positionId},
+                    data: {'data': JSON.stringify(list), 'positionId':positionId, 'position_type':position_type},
                     success: function(r){
                         if(r){
                             $.messager.alert('警告','新增成功');
@@ -77,6 +71,7 @@
             $('#btn_cancel').bind('click', function () {
                 var data = $('#window_auth_tree').tree('getChecked');
                 var positionId = $('#position').combobox('getValue');
+                var position_type = $('#position_type').combobox('getValue');
                 var list = [];
                 for (var i = 0; i < data.length; i++) {
                     if (data[i].children === undefined) {
@@ -89,7 +84,7 @@
                 $.ajax({
                     url: "position_auth/updatePositionAuth",
                     type: 'post',
-                    data: {'data': JSON.stringify(list), 'positionId':positionId},
+                    data: {'data': JSON.stringify(list), 'positionId':positionId, 'position_type':position_type},
                     success: function(r){
                         if(r){
                             $.messager.alert('警告','修改成功');
@@ -101,9 +96,6 @@
             });
 
         });
-
-
-
     </script>
 </head>
 <body>

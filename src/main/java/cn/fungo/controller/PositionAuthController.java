@@ -64,11 +64,12 @@ public class PositionAuthController {
 	public Integer insertPositionAuth(HttpServletRequest request) {
 		String data = request.getParameter("data");
 		String positionId = request.getParameter("positionId");
+		String positionType = request.getParameter("position_type");
 		if("".equals(positionId) || null == positionId) {
 			return 0;
 		}
 		List<AuthVO> list = Arrays.asList((AuthVO[]) JsonHelp.convertToArray(data, AuthVO.class));
-		Integer cnt = service.insertPositionAuth(list,positionId);
+		Integer cnt = service.insertPositionAuth(list,positionId,positionType);
 		return cnt;
 	}
 	
@@ -82,11 +83,12 @@ public class PositionAuthController {
 	public Integer updatePositionAuth(HttpServletRequest request) {
 		String data = request.getParameter("data");
 		String positionId = request.getParameter("positionId");
+		String positionType = request.getParameter("position_type");
 		if("".equals(positionId) || null == positionId) {
 			return 0;
 		}
 		List<AuthVO> list = Arrays.asList((AuthVO[]) JsonHelp.convertToArray(data, AuthVO.class));
-		Integer cnt = service.updatePositionAuth(list,positionId);
+		Integer cnt = service.updatePositionAuth(list,positionId,positionType);
 		return cnt;
 	}
 
